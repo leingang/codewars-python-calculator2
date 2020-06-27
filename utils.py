@@ -41,7 +41,5 @@ def add_logger(f):
             else:
                 globs['logger'] = logger_o
         return result
-    wrapped.__name__ = f.__name__
-    wrapped.__doc__ = f.__doc__
     return wrapped
 
