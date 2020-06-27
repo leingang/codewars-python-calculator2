@@ -3,9 +3,8 @@
 import logging
 import re
 
-from utils import config_logger, add_logger
-logger = logging.getLogger(__name__)
-config_logger(logger)
+from utils import get_logger, add_logger
+logger = get_logger(__name__)
 
 class Token(object):
     """A token"""
@@ -272,7 +271,17 @@ class NodeVistor(object):
         :code:`generic_visit`.
         """
         method_name = 'visit_' + node.__class__.__name__
-        visitor = getattr(self,method_name,'generic_visit')
+        # The kata doesn't allow use of g e t a t t r here, so
+        # we use a dictionary instead
+        visitors = {
+            'Number'  : self.visit_Number,
+            'BinOp'   : self.visit_BinOp,
+            'UnaryOp' : self.visit_UnaryOp
+        }
+        try:
+            visitor = visitors[node.__class__.__name__]
+        except KeyError:
+            visitor = 'generic_visit'
         return visitor(node)
 
     def generic_visit(node):
