@@ -31,6 +31,9 @@ def add_logger(f):
     CAUTION: Since python is lexically scoped, this hack reassigns
     a global variable.  See https://stackoverflow.com/q/17862185/297797
 
+    TODO: Allow the logger to be passed by name, rather than assuming 
+    that it's named `logger`.  That would require a decorator *factory.*
+
     """
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
