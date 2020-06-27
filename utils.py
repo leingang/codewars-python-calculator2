@@ -2,6 +2,11 @@
 import functools
 import logging
 
+def get_logger(name):
+    logger = logging.getLogger(name)
+    config_logger(logger)
+    return logger
+
 # Configure logging.
 # See https://docs.python.org/3/howto/logging.html#logging-basic-tutorial
 def config_logger(logger):
